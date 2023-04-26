@@ -7,7 +7,7 @@
  * @n: input number as an integer.
  *
  * Return: last digit.
- */
+*/
 int print_last_digit(int n)
 {
 	int l;
