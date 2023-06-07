@@ -1,3 +1,4 @@
+#include "lists.h"
 /**
  * free_listint_safe - Function frees a linked list
  * @h: Points to start of the linked list

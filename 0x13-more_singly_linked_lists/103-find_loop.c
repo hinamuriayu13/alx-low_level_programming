@@ -1,3 +1,5 @@
+#include "lists.h"
+
 /**
  * find_listint_loop -Function Finds the loop in a linked list.
  * @head: The Linked list to search for.

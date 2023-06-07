@@ -1,3 +1,4 @@
+#include "lists.h"
 /**
  * print_listint_safe - Prints a list safely.
  * @head: points to the head of the listint_t list.
