@@ -1,17 +1,18 @@
 #include "main.h"
+
 #include <stdlib.h>
 
 /**
- * read_textfile_custom - Read text file and print its contents to STDOUT.
- * @filename: Name of the text file to read
- * @letters: Maximum number of letters to be read
+ * read_textfile - Read text file and print to STDOUT.
+ * @filename: Name of the file to read.
+ * @letters: Number of letters to read and print.
  *
- * Return: Number of bytes read and printed, or 0 on failure or invalid input.
+ * Return: The actual number of letters read and printed, or 0 on failure.
  */
-ssize_t read_textfile_custom(const char *filename, size_t letters)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
 	char *buf;
-	ssize_t fd, bytes_read, bytes_written;
+	ssize_t fd, n_read, n_written;
 
 	if (filename == NULL)
 		return (0);
@@ -27,11 +28,23 @@ ssize_t read_textfile_custom(const char *filename, size_t letters)
 		return (0);
 	}
 
-	bytes_read = read(fd, buf, letters);
-	bytes_written = write(STDOUT_FILENO, buf, bytes_read);
+	n_read = read(fd, buf, letters);
+	if (n_read == -1)
+	{
+		free(buf);
+		close(fd);
+		return (0);
+	}
+
+	n_written = write(STDOUT_FILENO, buf, n_read);
+	if (n_written == -1 || n_written != n_read)
+	{
+		free(buf);
+		close(fd);
+		return (0);
+	}
 
 	free(buf);
 	close(fd);
-
-	return bytes_written;
+	return (n_written);
 }
